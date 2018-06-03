@@ -42,15 +42,28 @@ const Spotify = {
 
     fetch(completeSearchURL, httpRequestData)
       .then(response => {
+        let arrayResponse = [];
+
         if (response.status != 200) {
           console.log(
             "Looks like there was a problem. Status code: " + response.status
           );
-          return;
+          return arrayResponse;
         }
 
         response.json().then(data => {
           console.log(data);
+          data.map(track => {
+            let mappedTracked = {
+              ID: track.id,
+              Name: track.name,
+              Artist: track.artists[0].name,
+              Album: track.album.name,
+              URI: track.uri
+            };
+            arrayResponse.append(mappedTracked);
+          });
+          return arrayResponse;
         });
       })
       .catch(err => {
