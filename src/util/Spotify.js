@@ -14,7 +14,7 @@ const Spotify = {
       const expiresIn = window.location.href.match(/expires_in=([^&]*)/);
       if (newAccessToken && expiresIn) {
         accessToken = newAccessToken[1];
-        expiresIn = expiresIn[1];
+        let expiresIn = expiresIn[1];
         window.setTimeout(() => (accessToken = ""), expiresIn * 1000);
         window.history.pushState("Access Token", null, "/");
         return accessToken;
@@ -55,11 +55,11 @@ const Spotify = {
           console.log(data);
           data.map(track => {
             let mappedTracked = {
-              ID: track.id,
-              Name: track.name,
-              Artist: track.artists[0].name,
-              Album: track.album.name,
-              URI: track.uri
+              id: track.id,
+              name: track.name,
+              artist: track.artists[0].name,
+              album: track.album.name,
+              uri: track.uri
             };
             arrayResponse.append(mappedTracked);
           });
